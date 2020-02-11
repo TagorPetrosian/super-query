@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HorizontalMenuItem from './HorizontalMenuItem';
+import uuid from 'uuid';
 
 const App = () => {
   const [data, setData] = useState({});
@@ -33,7 +34,25 @@ const App = () => {
               children: [
                 {
                   name: 'edit11',
-                  children: []
+                  children: [
+                    {
+                      name: 'edit111',
+                      children: [
+                        {
+                          name: 'edit1111',
+                          children: []
+                        },
+                        {
+                          name: 'edit1112',
+                          children: []
+                        },
+                        {
+                          name: 'edit1113',
+                          children: []
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   name: 'edit12',
@@ -68,19 +87,21 @@ const App = () => {
   }, []);
 
   return (
-    <ul className="root">
-      {data &&
-        data.children &&
-        data.children.map((child, index) => {
-          return (
-            <HorizontalMenuItem
-              key={index}
-              name={child.name}
-              children={child.children}
-            />
-          );
-        })}
-    </ul>
+    <div className="container">
+      <div className="header">
+        {data &&
+          data.children &&
+          data.children.map(({ children, name }) => {
+            return (
+              <HorizontalMenuItem
+                key={uuid()}
+                children={children}
+                name={name}
+              />
+            );
+          })}
+      </div>
+    </div>
   );
 };
 
